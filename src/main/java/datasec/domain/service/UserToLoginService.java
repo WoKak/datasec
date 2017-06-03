@@ -55,6 +55,8 @@ public class UserToLoginService {
             checkStat.setString(1, newUserToLogin.getLogin());
             ResultSet result = checkStat.executeQuery();
 
+            t.run();
+
             if (!result.next()) {
                 throw new ApplicationException("Błąd aplikacji!");
             }
@@ -63,13 +65,15 @@ public class UserToLoginService {
 
             String hashToCheck = Hashing.sha256().hashString(salted, StandardCharsets.UTF_8).toString();
 
-            for(int i = 0; i < 5; i++) {
+            for(int i = 0; i < 1000; i++) {
                 hashToCheck = Hashing.sha256().hashString(hashToCheck, StandardCharsets.UTF_8).toString();
             }
 
             if (!hashToCheck.equals(result.getString(2))) {
                 throw new ApplicationException("Błąd aplikacji!");
             }
+
+            t.run();
 
             loggedUser.setLogged(true);
             loggedUser.setLogin(newUserToLogin.getLogin());
@@ -89,7 +93,7 @@ class SlowThread implements Runnable {
 
         try {
 
-            Thread.sleep(5000);
+            Thread.sleep(2000);
 
         } catch (InterruptedException e) {
             e.printStackTrace();

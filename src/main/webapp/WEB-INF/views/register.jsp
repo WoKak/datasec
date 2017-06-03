@@ -26,6 +26,14 @@
         <div>
             <form:input id="repeatedPassword" path="repeatedPassword" type="password" htmlEscape="true"/>
         </div>
+        <label>Define question:</label>
+        <div>
+            <form:input id="question" path="question" type="text" htmlEscape="true"/>
+        </div>
+        <label>Define answer:</label>
+        <div>
+            <form:input id="answer" path="answer" type="password" htmlEscape="true"/>
+        </div>
         <div class="form-group">
             <input type="submit" id="register_button" value="Register"/>
         </div>

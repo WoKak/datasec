@@ -6,11 +6,11 @@
     <title>datasec</title>
 </head>
 <body>
-<h2>Define newQuestion for password reset:</h2>
-<form:form modelAttribute="newQuestion">
+<h2>Define new question for password reset:</h2>
+<form:form modelAttribute="question">
     <label>Question:</label>
     <div class="form-group">
-        <form:input id="newQuestion" path="newQuestion" type="text" htmlEscape="true"/>
+        <form:input id="question" path="question" type="text" htmlEscape="true"/>
     </div>
     <label>Answer:</label>
     <div>

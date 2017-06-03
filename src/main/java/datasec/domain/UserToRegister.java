@@ -24,13 +24,21 @@ public class UserToRegister {
     @Pattern(regexp = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,20})")
     private String repeatedPassword;
 
+    @NotNull
+    private String question;
+
+    @NotNull
+    private String answer;
+
     public UserToRegister() {
     }
 
-    public UserToRegister(String login, String password, String repeatedPassword) {
+    public UserToRegister(String login, String password, String repeatedPassword, String question, String answer) {
         this.login = login;
         this.password = password;
         this.repeatedPassword = repeatedPassword;
+        this.question = question;
+        this.answer = answer;
     }
 
     public String getLogin() {
@@ -55,5 +63,21 @@ public class UserToRegister {
 
     public void setRepeatedPassword(String repeatedPassword) {
         this.repeatedPassword = repeatedPassword;
+    }
+
+    public String getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
 }

@@ -15,7 +15,7 @@
         <li><a href="/addCode">add new code</a></li>
         <li><a href="/snippets">see snippets</a></li>
         <li><a href="/change">change password</a></li>
-        <li><a href="/newQuestion">define question</a></li>
+        <li><a href="/question">define question</a></li>
         <li><a href="/logout">logout</a></li>
     </ul>
 </body>

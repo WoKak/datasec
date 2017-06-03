@@ -50,7 +50,7 @@ public class PasswordChangeService {
 
             String hash = Hashing.sha256().hashString(salted, StandardCharsets.UTF_8).toString();
 
-            for(int i = 0; i < 5; i++) {
+            for(int i = 0; i < 1000; i++) {
                 hash = Hashing.sha256().hashString(hash, StandardCharsets.UTF_8).toString();
             }
 
@@ -69,7 +69,7 @@ public class PasswordChangeService {
 
             String hashNew = Hashing.sha256().hashString(saltedNew, StandardCharsets.UTF_8).toString();
 
-            for(int i = 0; i < 5; i++) {
+            for(int i = 0; i < 1000; i++) {
                 hashNew = Hashing.sha256().hashString(hashNew, StandardCharsets.UTF_8).toString();
             }
 

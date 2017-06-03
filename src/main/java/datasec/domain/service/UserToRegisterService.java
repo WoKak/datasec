@@ -56,21 +56,29 @@ public class UserToRegisterService {
                 throw new ApplicationException("Błąd aplikacji!");
             }
 
-            String insert = "INSERT INTO users (login, password) VALUES (?, ?)";
+            String insertUsers = "INSERT INTO users (login, password) VALUES (?, ?)";
 
 
             String salted = "^*)" + newUserToRegister.getPassword() + "%h&";
 
             String hash = Hashing.sha256().hashString(salted, StandardCharsets.UTF_8).toString();
 
-            for(int i = 0; i < 5; i++) {
+            for(int i = 0; i < 1000; i++) {
                 hash = Hashing.sha256().hashString(hash, StandardCharsets.UTF_8).toString();
             }
 
-            PreparedStatement pstat = connection.prepareStatement(insert);
-            pstat.setString(1, newUserToRegister.getLogin());
-            pstat.setString(2, hash);
-            pstat.executeUpdate();
+            PreparedStatement pstat1 = connection.prepareStatement(insertUsers);
+            pstat1.setString(1, newUserToRegister.getLogin());
+            pstat1.setString(2, hash);
+            pstat1.executeUpdate();
+
+            String insertQuestions = "INSERT INTO questions (login, question, answer) VALUES (?, ?, ?)";
+
+            PreparedStatement pstat2 = connection.prepareStatement(insertQuestions);
+            pstat2.setString(1, newUserToRegister.getLogin());
+            pstat2.setString(2, newUserToRegister.getQuestion());
+            pstat2.setString(3, newUserToRegister.getAnswer());
+            pstat2.executeUpdate();
 
         } catch (SQLException ex) {
 
