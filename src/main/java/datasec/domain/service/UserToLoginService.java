@@ -34,6 +34,9 @@ public class UserToLoginService {
         this.dataSource = ds;
     }
 
+    /**
+     * method used for authorization - in typical way
+     */
     public void auth(UserToLogin newUserToLogin, BindingResult bindingResult) {
 
         try {
@@ -65,6 +68,7 @@ public class UserToLoginService {
 
             String hashToCheck = Hashing.sha256().hashString(salted, StandardCharsets.UTF_8).toString();
 
+            //thousand times hashed
             for(int i = 0; i < 1000; i++) {
                 hashToCheck = Hashing.sha256().hashString(hashToCheck, StandardCharsets.UTF_8).toString();
             }
@@ -86,6 +90,9 @@ public class UserToLoginService {
     }
 }
 
+/**
+ * thread used for slowing whole process
+ */
 class SlowThread implements Runnable {
 
     @Override

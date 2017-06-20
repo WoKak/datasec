@@ -7,6 +7,10 @@ import javax.validation.constraints.Size;
 /**
  * Created by Michał on 2017-06-03.
  */
+
+/**
+ * Holds information about login of user to reset
+ */
 public class UserToReset {
 
     @NotNull

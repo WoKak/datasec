@@ -8,6 +8,10 @@ import java.util.List;
 /**
  * Created by Michał on 2017-05-25.
  */
+
+/**
+ * Code repo class used for storing snippets
+ */
 public class CodeRepository {
 
     private List<Code> snippets;

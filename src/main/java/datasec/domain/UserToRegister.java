@@ -7,6 +7,10 @@ import javax.validation.constraints.Size;
 /**
  * Created by Michał on 2017-06-01.
  */
+
+/**
+ * Hold information about user for registration
+ */
 public class UserToRegister {
 
     @NotNull

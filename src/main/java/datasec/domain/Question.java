@@ -3,6 +3,10 @@ package datasec.domain;
 /**
  * Created by Michał on 2017-06-03.
  */
+
+/**
+ * Question used for password reset
+ */
 public class Question {
 
     private String question;

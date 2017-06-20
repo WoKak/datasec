@@ -29,7 +29,10 @@ public class ResetService {
     @Autowired
     DataSource dataSource;
 
-
+    /**
+     * Checks if user exists
+     * @param userToReset (his/her login)
+     */
     public void reset(UserToReset userToReset, BindingResult bindingResult) {
 
         if (Optional.ofNullable(bindingResult).isPresent())
@@ -40,6 +43,10 @@ public class ResetService {
         loggedUser.setLogin(userToReset.getLogin());
     }
 
+    /**
+     * method used for getting question from database, for user to reset
+     * @return question for resetting password
+     */
     public Question getQuestion() {
 
         Question toReturn;
@@ -69,6 +76,11 @@ public class ResetService {
         return toReturn;
     }
 
+    /**
+     * asserts answers
+     * @param answer user answer
+     * @param question question which had been asked
+     */
     public void assertAnswers(Answer answer, Question question) {
 
         if (answer.getAnswer().equals(question.getAnswer())) {

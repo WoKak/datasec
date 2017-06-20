@@ -29,6 +29,9 @@ public class UserToRegisterService {
         this.dataSource = ds;
     }
 
+    /**
+     * method responsible for registering user - in typical way (first user into users, then question into questions)
+     */
     public void addUser(UserToRegister newUserToRegister, BindingResult bindingResult) {
 
         try {

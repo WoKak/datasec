@@ -29,6 +29,11 @@ public class PasswordChangeService {
     @Autowired
     LoggedUser loggedUser;
 
+    /**
+     * Changes user password, checks if previous matches, then change
+     * @param passwordToChange object containing required information
+     * @param bindingResult result of ninding
+     */
     public void change(PasswordToChange passwordToChange, BindingResult bindingResult) {
 
         try {

@@ -5,6 +5,10 @@ import javax.validation.constraints.NotNull;
 /**
  * Created by Michał on 2017-06-03.
  */
+
+/**
+ * Object used for changing question
+ */
 public class NewQuestion {
 
     @NotNull

@@ -4,6 +4,9 @@ package datasec.domain;
  * Created by Michał on 2017-06-01.
  */
 
+/**
+ * Bean used for storing information which user is logged
+ */
 public class LoggedUser {
 
     private String login;

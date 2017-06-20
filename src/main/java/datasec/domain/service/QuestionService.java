@@ -27,6 +27,11 @@ public class QuestionService {
     @Autowired
     LoggedUser loggedUser;
 
+    /**
+     * Changes question, checks previous, then change
+     * @param q object containing required information
+     * @param bindingResult result of binding the form
+     */
     public void change(NewQuestion q, BindingResult bindingResult) {
 
         try {

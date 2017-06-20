@@ -3,6 +3,10 @@ package datasec.domain;
 /**
  * Created by Michał on 2017-06-03.
  */
+
+/**
+ * Answer for reset question
+ */
 public class Answer {
 
     private String answer;

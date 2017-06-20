@@ -1,3 +1,4 @@
+//script used for counting the entropy of the password and informing user about its strength
 function textareaLengthCheck() {
 
     var e = document.getElementsByClassName("strength");

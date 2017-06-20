@@ -25,6 +25,11 @@ public class CodeService {
         this.dataSource = ds;
     }
 
+    /**
+     * Adds snippet to database, as well as code repo
+     * @param code to be added
+     * @param result of binding
+     */
     public void addCode(Code code, BindingResult result) {
 
         try {
@@ -45,6 +50,9 @@ public class CodeService {
         codeRepo.getSnippets().add(code);
     }
 
+    /**
+     * method used for initializing the repo
+     */
     public void initRepo() {
 
         try {

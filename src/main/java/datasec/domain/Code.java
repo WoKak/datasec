@@ -3,6 +3,10 @@ package datasec.domain;
 /**
  * Created by Michał on 2017-05-25.
  */
+
+/**
+ * Snippet
+ */
 public class Code {
 
     private String text;

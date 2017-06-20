@@ -25,6 +25,9 @@ public class AppConfig {
     @Autowired
     private Environment env;
 
+    /**
+     * Database bean
+     */
     @Bean
     public DataSource dataSource() {
 
@@ -37,6 +40,9 @@ public class AppConfig {
         return ds;
     }
 
+    /**
+     * Validator bean
+     */
     @Bean
     public LocalValidatorFactoryBean validator() {
 
@@ -44,6 +50,9 @@ public class AppConfig {
         return v;
     }
 
+    /**
+     * Code repo bean
+     */
     @Bean
     public CodeRepository codeRepository() {
 
@@ -53,6 +62,9 @@ public class AppConfig {
         return cr;
     }
 
+    /**
+     * Logged user bean
+     */
     @Bean
     public LoggedUser loggedUser() {
 
