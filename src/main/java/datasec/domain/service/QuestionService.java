@@ -1,5 +1,6 @@
 package datasec.domain.service;
 
+import com.google.common.hash.Hashing;
 import datasec.domain.LoggedUser;
 import datasec.domain.NewQuestion;
 import datasec.exception.ApplicationException;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
 import javax.sql.DataSource;
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -51,14 +53,22 @@ public class QuestionService {
 
             result.next();
 
-            if (!result.getString(3).equals(q.getPrevious())) {
+            String prevHash = Hashing.sha256().hashString(
+                    q.getPrevious(), StandardCharsets.UTF_8
+            ).toString();
+
+            if (!result.getString(3).equals(prevHash)) {
                 throw new ApplicationException("Błąd aplikacji!");
             }
+
+            String nextHash = Hashing.sha256().hashString(
+                    q.getAnswer(), StandardCharsets.UTF_8
+            ).toString();
 
             String updateQuery = "UPDATE questions SET question = ?, answer = ? WHERE login = ?";
             PreparedStatement pstat = connection.prepareStatement(updateQuery);
             pstat.setString(1, q.getQuestion());
-            pstat.setString(2, q.getAnswer());
+            pstat.setString(2, nextHash);
             pstat.setString(3, loggedUser.getLogin());
             pstat.executeUpdate();
 

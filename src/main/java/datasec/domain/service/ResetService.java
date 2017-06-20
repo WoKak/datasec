@@ -1,5 +1,6 @@
 package datasec.domain.service;
 
+import com.google.common.hash.Hashing;
 import datasec.domain.Answer;
 import datasec.domain.LoggedUser;
 import datasec.domain.Question;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
 import javax.sql.DataSource;
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -83,7 +85,7 @@ public class ResetService {
      */
     public void assertAnswers(Answer answer, Question question) {
 
-        if (answer.getAnswer().equals(question.getAnswer())) {
+        if ( check(answer, question) ) {
 
             loggedUser.setLogged(true);
 
@@ -91,5 +93,15 @@ public class ResetService {
 
             throw new ApplicationException("Błąd aplikacji!");
         }
+    }
+
+    /**
+     * Makes hash of answer and makes assertion, then returns boolean value
+     */
+    public boolean check(Answer answer, Question question) {
+
+        String hash = Hashing.sha256().hashString(answer.getAnswer(), StandardCharsets.UTF_8).toString();
+
+        return hash.equals(question.getAnswer());
     }
 }

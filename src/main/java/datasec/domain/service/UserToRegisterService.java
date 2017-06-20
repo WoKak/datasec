@@ -80,7 +80,11 @@ public class UserToRegisterService {
             PreparedStatement pstat2 = connection.prepareStatement(insertQuestions);
             pstat2.setString(1, newUserToRegister.getLogin());
             pstat2.setString(2, newUserToRegister.getQuestion());
-            pstat2.setString(3, newUserToRegister.getAnswer());
+
+            String questionHash = Hashing.sha256().hashString(
+                    newUserToRegister.getAnswer(), StandardCharsets.UTF_8
+            ).toString();
+            pstat2.setString(3, questionHash);
             pstat2.executeUpdate();
 
         } catch (SQLException ex) {
