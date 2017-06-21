@@ -24,14 +24,13 @@ import java.util.Optional;
 public class UserToLoginService {
 
     private DataSource dataSource;
+    private LoggedUser loggedUser;
 
     @Autowired
-    LoggedUser loggedUser;
-
-    @Autowired
-    public UserToLoginService(DataSource ds) {
+    public UserToLoginService(DataSource ds, LoggedUser lu) {
 
         this.dataSource = ds;
+        this.loggedUser = lu;
     }
 
     /**
