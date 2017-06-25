@@ -72,7 +72,7 @@ public class ResetTest {
 
         Question test = new Question(
                 "Who won the league?",
-                Hash.helpfulHashService("Chelski", 0, false)
+                Hash.helpfulHashMethod("Chelski", 0, false)
         );
 
         Question fromBase = resetService.getQuestion();
