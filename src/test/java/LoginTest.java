@@ -1,9 +1,8 @@
 import datasec.domain.LoggedUser;
 import datasec.domain.UserToLogin;
-import datasec.domain.service.UserToLoginService;
+import datasec.domain.service.LoginService;
 import datasec.exception.ApplicationException;
 import org.junit.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.support.EncodedResource;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
@@ -19,7 +18,7 @@ import static org.springframework.jdbc.datasource.init.ScriptUtils.executeSqlScr
 public class LoginTest {
 
     private static EmbeddedDatabase database;
-    private static UserToLoginService userToLoginService;
+    private static LoginService userToLoginService;
     private static LoggedUser loggedUser;
 
     /**
@@ -34,7 +33,7 @@ public class LoginTest {
                 .build();
 
         loggedUser = new LoggedUser("");
-        userToLoginService = new UserToLoginService(database, loggedUser);
+        userToLoginService = new LoginService(database, loggedUser);
 
     }
 

@@ -17,7 +17,7 @@ CREATE TABLE questions (
 
     login character(50),
     question character(50),
-    answer character(50)
+    answer character(64)
 );
 
 CREATE TABLE snippets (

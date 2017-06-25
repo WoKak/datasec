@@ -1,7 +1,7 @@
 package datasec.web;
 
 import datasec.domain.UserToLogin;
-import datasec.domain.service.UserToLoginService;
+import datasec.domain.service.LoginService;
 import datasec.exception.ApplicationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,10 +25,10 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @RequestMapping("/login")
 public class LoginPageController {
 
-    private UserToLoginService userToLoginService;
+    private LoginService userToLoginService;
 
     @Autowired
-    public LoginPageController(UserToLoginService us) {
+    public LoginPageController(LoginService us) {
         this.userToLoginService = us;
     }
 

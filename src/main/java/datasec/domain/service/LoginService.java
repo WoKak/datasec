@@ -21,13 +21,13 @@ import java.util.Optional;
  */
 
 @Service
-public class UserToLoginService {
+public class LoginService {
 
     private DataSource dataSource;
     private LoggedUser loggedUser;
 
     @Autowired
-    public UserToLoginService(DataSource ds, LoggedUser lu) {
+    public LoginService(DataSource ds, LoggedUser lu) {
 
         this.dataSource = ds;
         this.loggedUser = lu;

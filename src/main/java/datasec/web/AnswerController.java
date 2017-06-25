@@ -14,6 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 
+import java.sql.SQLException;
+
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
@@ -36,7 +38,7 @@ public class AnswerController {
     }
 
     @RequestMapping(method = GET)
-    public String resetGet(Model model) {
+    public String resetGet(Model model) throws SQLException {
 
         question = this.resetService.getQuestion();
         model.addAttribute("question", question.getQuestion());
@@ -55,9 +57,16 @@ public class AnswerController {
     }
 
 
-
     @ExceptionHandler(ApplicationException.class)
     public ModelAndView handleAppException() {
+
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("exception");
+        return mav;
+    }
+
+    @ExceptionHandler(SQLException.class)
+    public ModelAndView handleSQLException() {
 
         ModelAndView mav = new ModelAndView();
         mav.setViewName("exception");

@@ -25,14 +25,19 @@ import java.util.Optional;
 @Service
 public class ResetService {
 
-    @Autowired
-    LoggedUser loggedUser;
+    private LoggedUser loggedUser;
+    private DataSource dataSource;
 
     @Autowired
-    DataSource dataSource;
+    public ResetService(LoggedUser lu, DataSource ds) {
+
+        this.loggedUser = lu;
+        this.dataSource = ds;
+    }
 
     /**
      * Checks if user exists
+     *
      * @param userToReset (his/her login)
      */
     public void reset(UserToReset userToReset, BindingResult bindingResult) {
@@ -47,45 +52,40 @@ public class ResetService {
 
     /**
      * method used for getting question from database, for user to reset
+     *
      * @return question for resetting password
      */
-    public Question getQuestion() {
+    public Question getQuestion() throws SQLException {
 
         Question toReturn;
 
-        try {
-
-            Connection connection = dataSource.getConnection();
+        Connection connection = dataSource.getConnection();
 
 
-            String query = "SELECT users.login, question, answer FROM users " +
-                    "INNER JOIN questions ON users.login = questions.login " +
-                    "WHERE questions.login = ? ";
-            PreparedStatement checkStat = connection.prepareStatement(query);
-            checkStat.setString(1, loggedUser.getLogin());
-            ResultSet result = checkStat.executeQuery();
+        String query = "SELECT users.login, question, answer FROM users " +
+                "INNER JOIN questions ON users.login = questions.login " +
+                "WHERE questions.login = ? ";
+        PreparedStatement checkStat = connection.prepareStatement(query);
+        checkStat.setString(1, loggedUser.getLogin());
+        ResultSet result = checkStat.executeQuery();
 
-            result.next();
+        result.next();
 
-            toReturn = new Question(result.getString(2), result.getString(3));
+        toReturn = new Question(result.getString(2).trim(), result.getString(3));
 
-        } catch (SQLException ex) {
-
-            ex.printStackTrace();
-            throw new ApplicationException("Błąd aplikacji!");
-        }
 
         return toReturn;
     }
 
     /**
      * asserts answers
-     * @param answer user answer
+     *
+     * @param answer   user answer
      * @param question question which had been asked
      */
     public void assertAnswers(Answer answer, Question question) {
 
-        if ( check(answer, question) ) {
+        if (check(answer, question)) {
 
             loggedUser.setLogged(true);
 
