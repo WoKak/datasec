@@ -21,7 +21,7 @@ import java.util.Optional;
  */
 
 @Service
-public class QuestionService {
+public class QuestionChangeService {
 
     @Autowired
     DataSource dataSource;

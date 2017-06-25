@@ -1,5 +1,4 @@
 import datasec.domain.*;
-import datasec.domain.service.LoginService;
 import datasec.domain.service.ResetService;
 import datasec.exception.ApplicationException;
 import org.junit.*;
@@ -41,7 +40,6 @@ public class ResetTest {
 
     /**
      * Inserts data into test database
-     *
      * @throws ScriptException
      */
     @Before

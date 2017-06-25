@@ -2,7 +2,7 @@ package datasec.web;
 
 import datasec.domain.LoggedUser;
 import datasec.domain.NewQuestion;
-import datasec.domain.service.QuestionService;
+import datasec.domain.service.QuestionChangeService;
 import datasec.exception.ApplicationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,13 +26,13 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @RequestMapping("/question")
 public class QuestionPageController {
 
-    private QuestionService questionService;
+    private QuestionChangeService questionService;
 
     @Autowired
     LoggedUser loggedUser;
 
     @Autowired
-    public QuestionPageController(QuestionService qs) {
+    public QuestionPageController(QuestionChangeService qs) {
 
         this.questionService = qs;
     }
