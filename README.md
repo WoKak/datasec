@@ -1,6 +1,6 @@
-# webPlang
+# datasec
 
-this is a web platform for learning language
+this is an app similar to Gruyere but designed to be more secure
 
 ## Technology stack
 
