@@ -23,11 +23,15 @@ import java.util.Optional;
 @Service
 public class PasswordChangeService {
 
-    @Autowired
-    DataSource dataSource;
+    private DataSource dataSource;
+    private LoggedUser loggedUser;
 
     @Autowired
-    LoggedUser loggedUser;
+    public PasswordChangeService(DataSource ds, LoggedUser lu) {
+
+        this.dataSource = ds;
+        this.loggedUser = lu;
+    }
 
     /**
      * Changes user password, checks if previous matches, then change

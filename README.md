@@ -15,6 +15,8 @@ this is a web platform for learning language
 * CSS
 * JSP
 * Google guava 22.0
+* JUnit 4.8.2
+* HSQLDB 2.3.4
 
 ## Features
 
