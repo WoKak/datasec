@@ -84,7 +84,7 @@ public class PasswordChangeTest {
 
             Connection connection = database.getConnection();
 
-            String query = "SELECT * FROM users WHERE user = 'testUser'";
+            String query = "SELECT * FROM users WHERE login = 'testUser'";
             Statement statement = connection.createStatement();
             ResultSet result = statement.executeQuery(query);
 

@@ -11,7 +11,7 @@ public class Hash {
 
     public static void main(String[] args) {
 
-        String hashToCheck = helpfulHashMethod("Al@makota2", 1000, true);
+        String hashToCheck = helpfulHashMethod("Chelski", 0, false);
 
         System.out.println(hashToCheck);
     }

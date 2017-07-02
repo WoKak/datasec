@@ -3,6 +3,7 @@ package datasec.domain.service;
 import com.google.common.hash.Hashing;
 import datasec.domain.LoggedUser;
 import datasec.domain.NewQuestion;
+import datasec.domain.Question;
 import datasec.exception.ApplicationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,11 +24,15 @@ import java.util.Optional;
 @Service
 public class QuestionChangeService {
 
-    @Autowired
-    DataSource dataSource;
+    private DataSource dataSource;
+    private LoggedUser loggedUser;
 
     @Autowired
-    LoggedUser loggedUser;
+    public QuestionChangeService(DataSource ds, LoggedUser lu) {
+
+        this.dataSource = ds;
+        this.loggedUser = lu;
+    }
 
     /**
      * Changes question, checks previous, then change

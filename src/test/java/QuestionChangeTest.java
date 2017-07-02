@@ -1,26 +1,31 @@
-import datasec.domain.UserToRegister;
-import datasec.domain.service.UserToRegisterService;
+import datasec.domain.LoggedUser;
+import datasec.domain.NewQuestion;
+import datasec.domain.service.QuestionChangeService;
 import datasec.exception.ApplicationException;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.support.EncodedResource;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.jdbc.datasource.init.ScriptException;
+import tools.Hash;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import static org.springframework.jdbc.datasource.init.ScriptUtils.executeSqlScript;
 
 /**
- * Created by Michał on 2017-07-01.
+ * Created by Michał on 2017-07-02.
  */
-public class RegisterTest {
+public class QuestionChangeTest {
 
     private static EmbeddedDatabase database;
-    private static UserToRegisterService registerService;
+    private static LoggedUser loggedUser;
+    private static QuestionChangeService questionChangeService;
 
     /**
      * Sets up database for tests
@@ -33,7 +38,8 @@ public class RegisterTest {
                 .addScript("database/db-schema.sql")
                 .build();
 
-        registerService = new UserToRegisterService(database);
+        loggedUser = new LoggedUser("testUser");
+        questionChangeService = new QuestionChangeService(database, loggedUser);
     }
 
     /**
@@ -54,45 +60,34 @@ public class RegisterTest {
     }
 
     @Test(expected = ApplicationException.class)
-    public void shouldNotAllowToRegisterBecauseOfSameLogin() {
+    public void shouldNotAllowToChangeBecauseOfIncorrectAnswer() {
 
-        UserToRegister test = new UserToRegister(
-                "testUser",
-                "test",
-                "test",
-                "What?",
-                "Nothing!"
-        );
-
-        registerService.addUser(test, null);
-    }
-
-    @Test(expected = ApplicationException.class)
-    public void shouldNotAllowToRegisterBecauseOfDifferenceInPasswords() {
-
-        UserToRegister test = new UserToRegister(
-                "newUser",
-                "testful",
-                "test",
-                "What?",
-                "Nothing!"
-        );
-
-        registerService.addUser(test, null);
+        NewQuestion test = new NewQuestion("Chelsea", "What?", "Nothing!");
+        questionChangeService.change(test, null);
     }
 
     @Test
-    public void shouldAllowToRegister() {
+    public void shouldAllowToChange() {
 
-        UserToRegister test = new UserToRegister(
-                "newUser",
-                "test",
-                "test",
-                "What?",
-                "Nothing!"
-        );
+        NewQuestion test = new NewQuestion("Chelski", "What?", "Nothing!");
+        questionChangeService.change(test, null);
 
-        registerService.addUser(test, null);
+        try {
+
+            Connection connection = database.getConnection();
+
+            String query = "SELECT * FROM questions WHERE login = 'testUser'";
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery(query);
+
+            result.next();
+
+            String toAssert = Hash.helpfulHashMethod("Nothing!", 0, false);
+            Assert.assertTrue(result.getNString(3).equals(toAssert));
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @AfterClass
